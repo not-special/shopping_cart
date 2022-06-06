@@ -1,0 +1,22 @@
+{
+  "name": "shopping_cart_boilerplate",
+  "version": "1.0.0",
+  "description": "## Setup",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/not-special/shopping_cart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/not-special/shopping_cart/issues"
+  },
+  "homepage": "https://github.com/not-special/shopping_cart#readme"
+}

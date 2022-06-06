@@ -1,9 +1,39 @@
 import React from "react";
+import Header from "./Header";
 
-const App = () => {
+/*
+header
+  > cart details
+products list
+  > product
+    > display product
+    > edit product
+new product form
+*/
+
+// const Products = () => {
+
+// }
+
+// const Product = () => {
+
+// }
+
+// const EditForm = () => {
+
+// }
+
+// const AddForm = () => {
+
+// }
+
+const App = ({ inventory, cart }) => {  
   return (
     <div id="app">
-      <h1>Welcome</h1>
+      <Header cart={cart}/>
+      <main>
+
+      </main>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import ProductList from "./ProductList";
 
 /*
 header
@@ -32,7 +33,7 @@ const App = ({ inventory, cart }) => {
     <div id="app">
       <Header cart={cart}/>
       <main>
-
+        <ProductList inventory={inventory} />
       </main>
     </div>
   );

@@ -22,6 +22,16 @@ const App = () => {
     setProductFormVisible(!productFormVisible)
   }
 
+  const handleDeleteProduct = (id) => {
+    productService 
+      .remove(id)
+      .then((response) => {
+        console.log('response for delete:', response);
+        setProducts(products.filter(product => product._id !== id));
+      })
+  }
+
+
 	return (
     <div id="app">
       <header>
@@ -29,7 +39,7 @@ const App = () => {
         <Cart />
       </header>
       <main>
-        <ProductListing products={products}/>
+        <ProductListing products={products} onDeleteProduct={handleDeleteProduct}/>
         <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible}/>
       </main>
     </div>

@@ -6,6 +6,11 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
+const remove = (id) => {
+  return axios.delete(`${baseUrl}/products/${id}`)
+} 
+
 export default {
-  getAll
+  getAll, 
+  remove,
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import ProductList from "./ProductList";
+import { useState, useEffect } from "react";
+import db from "../services/db_query"
 
 /*
 header
@@ -12,23 +14,28 @@ products list
 new product form
 */
 
-// const Products = () => {
+const App = () => {
+  const [ inventory, setInventory ] = useState([]);
+  const [ cart, setCart ] = useState([]);
 
-// }
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await db.getProducts();
+      setInventory(products);
+    }
+    fetchProducts();
+  }, []);
 
-// const Product = () => {
+  useEffect(() => {
+    const fetchCart = async () => {
+      const cart = await db.getCartItems();
+      setCart(cart);
+    }
+    fetchCart();
+  }, []);
 
-// }
+  
 
-// const EditForm = () => {
-
-// }
-
-// const AddForm = () => {
-
-// }
-
-const App = ({ inventory, cart }) => {  
   return (
     <div id="app">
       <Header cart={cart}/>

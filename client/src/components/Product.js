@@ -4,7 +4,8 @@ import EditProduct from "./EditProduct";
 const Product = ({item})=> {
   const [ showEdit, setShowEdit ] = useState(false);
   
-  const toggleEdit = () => {
+  const toggleEdit = (e) => {
+    e.preventDefault();
     setShowEdit(!showEdit)
   }
 
@@ -17,7 +18,7 @@ const Product = ({item})=> {
         <div className="actions product-actions">
           <a href="/#" className="button add-to-cart">Add to Cart</a>
           <a href="/#" className="button edit" onClick={toggleEdit}>Edit</a>
-          {showEdit && <EditProduct product={item} />}
+          {showEdit && <EditProduct item={item} onToggleEdit={toggleEdit} />}
         </div>
         <a href="/#" className="delete-button"><span>X</span></a>
       </div>

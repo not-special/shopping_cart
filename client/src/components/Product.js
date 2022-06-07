@@ -1,23 +1,27 @@
-import ProductDisplay from './ProductDisplay';
-// import ProductEdit from './ProductEdit';
+import { useState } from "react";
+import EditProduct from "./EditProduct";
 
-const Product = ({ item }) => {
-  // state for editable
-
+const Product = ({item})=> {
+  const [ showEdit, setShowEdit ] = useState(false);
   
-  // if (false) {
-  //   return (
-  //     <>
-  //     <ProductDisplay />
-  //     <ProductEdit />
-  //     </>
-  //   )
-  // }
+  const toggleEdit = () => {
+    setShowEdit(!showEdit)
+  }
 
   return (
-    <>
-    <ProductDisplay item={item}/>
-    </>
+    <div class="product">
+          <div class="product-details">
+            <h3>{item.title}</h3>
+            <p class="price">{item.price}</p>
+            <p class="quantity">{item.quantity} left in stock</p>
+            <div class="actions product-actions">
+              <a class="button add-to-cart">Add to Cart</a>
+              <a class="button edit" onClick={toggleEdit}>Edit</a>
+              {showEdit && <EditProduct product={item} />}
+            </div>
+            <a class="delete-button"><span>X</span></a>
+          </div>
+        </div>
   );
 }
 

@@ -1,4 +1,5 @@
 import CartItem from "./CartItem";
+import calcCartTotal from "../lib/calcCartTotal";
 
 const Cart = ({ currentCart }) => {
   if (currentCart.length === 0) {
@@ -7,7 +8,7 @@ const Cart = ({ currentCart }) => {
         <h2>Your Cart</h2>
         <p>Your cart is empty</p>
         <p>Total: $0</p>
-        <a href="/" className="button checkout disabled">Checkout</a>
+        <a className="button checkout disabled">Checkout</a>
       </div>
     );
   }
@@ -20,13 +21,12 @@ const Cart = ({ currentCart }) => {
             <th>Quantity</th>
             <th>Price</th>
           </tr>
-          {/* {currentCart.map(cartItem => <CartItem key={cartItem.id} />)} */}
-          <CartItem />
+          {currentCart.map(cartItem => <CartItem key={cartItem.id} itemDetail={cartItem}/>)}
           <tr>
-            <td colspan="3" class="total">Total: $160ish</td>
+            <td colspan="3" class="total">Total: {calcCartTotal(currentCart)}</td>
           </tr>
         </table>
-        <a href="/" class="button checkout">Checkout</a>
+        <a href="https://www.launchschool.com" class="button checkout">Checkout</a>
       </div>
   )
 }

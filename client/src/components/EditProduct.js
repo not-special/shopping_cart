@@ -1,8 +1,5 @@
 const ProductEdit = ({ item, onToggleEdit })=> {
-  // const handleCancelClick = e => {
-  //   e.preventDefault();
-  //   console.log("link defauly prevented!");
-  // }
+  
   return (
     <div className="edit-form">
       <h3>Edit Product</h3>

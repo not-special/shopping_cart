@@ -12,9 +12,15 @@ const getCartItems = () => {
   return req.then(res => res.data);
 }
 
+const addNewProduct = (newProduct) => {
+  const req = axios.post(productURL, newProduct);
+  return req.then(res => res.data);
+}
+
 const dbServices = {
   getProducts,
-  getCartItems
+  getCartItems,
+  addNewProduct
 }
 
 export default dbServices;

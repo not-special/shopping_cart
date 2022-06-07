@@ -39,6 +39,13 @@ const App = () => {
       })
   }
 
+  const handleUpdateProduct = (id, changedProduct) => {
+    productService 
+      .update(id, changedProduct)
+      .then((response) => {
+        setProducts(products.map(product => product._id === id ? response : product));
+      })
+  }
 
 	return (
     <div id="app">
@@ -47,7 +54,7 @@ const App = () => {
         <Cart />
       </header>
       <main>
-        <ProductListing products={products} onDeleteProduct={handleDeleteProduct}/>
+        <ProductListing products={products} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct}/>
         <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
       </main>
     </div>

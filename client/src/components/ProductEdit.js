@@ -1,6 +1,20 @@
 import React from 'react'
 
-const ProductEdit = ({ product }) => {
+const ProductEdit = ({ product, onUpdateProduct }) => {
+
+	const handleUpdateProduct = (e) => {
+		e.preventDefault(); 
+		let test = {
+			"title": "Keyboard",
+			"price": 50,
+			"quantity": 5
+		}
+
+		onUpdateProduct("629f919e1efca6c2c0409e88", test);	
+	}
+
+
+
   return (
 		<div className="edit-form">
 		<h3>Edit Product</h3>
@@ -21,7 +35,7 @@ const ProductEdit = ({ product }) => {
 			</div>
 
 			<div className="actions form-actions">
-				<a className="button">Update</a>
+				<a className="button" onClick={handleUpdateProduct}>Update</a>
 				<a className="button">Cancel</a>
 			</div>
 		</form>

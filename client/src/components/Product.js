@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductEdit from './ProductEdit';
 
-const Product = ( { product, onDeleteProduct } ) => {
+const Product = ( { product, onDeleteProduct, onUpdateProduct } ) => {
 	const handleDeleteProduct = (e) => {
 		e.preventDefault();
 		onDeleteProduct(product._id);
@@ -20,7 +20,7 @@ const Product = ( { product, onDeleteProduct } ) => {
 				</div>
 				<a className="delete-button" onClick={handleDeleteProduct}><span>X</span></a>
 			</div>
-			<ProductEdit product={product}/>
+			<ProductEdit product={product} onUpdateProduct={onUpdateProduct}/>
 		</div>
 	)
 };

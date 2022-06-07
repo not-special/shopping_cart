@@ -14,8 +14,14 @@ const add = (product) => {
   return axios.post(`${baseUrl}/products`, product)
 }
 
+const update = (id, changedProduct) => {
+  const request = axios.put(`${baseUrl}/products/${id}`, changedProduct);
+  return request.then(response => response.data);
+}
+
 export default {
   getAll, 
   remove,
   add,
+  update, 
 }

@@ -44,7 +44,7 @@ const ProductAddForm = ({ onSubmitHandler })=> {
 
   return (
     <div className={addFormClass}>
-        <p><a className={showAddButton} onClick={toggleForm}>Add A Product</a></p>
+        <p><a href="/#" className={showAddButton} onClick={toggleForm}>Add A Product</a></p>
         <h3>Add Product</h3>
         <form>
           <div className="input-group">
@@ -63,8 +63,8 @@ const ProductAddForm = ({ onSubmitHandler })=> {
           </div>
 
           <div className="actions form-actions">
-            <a className="button" onClick={handleSubmit}>Add</a>
-            <a className="button" onClick={toggleForm}>Cancel</a>
+            <a href="/#" className="button" onClick={handleSubmit}>Add</a>
+            <a href="/#" className="button" onClick={toggleForm}>Cancel</a>
           </div>
         </form>
       </div>

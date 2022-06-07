@@ -10,18 +10,18 @@ const Product = ({item})=> {
 
   return (
     <div class="product">
-          <div class="product-details">
-            <h3>{item.title}</h3>
-            <p class="price">{item.price}</p>
-            <p class="quantity">{item.quantity} left in stock</p>
-            <div class="actions product-actions">
-              <a class="button add-to-cart">Add to Cart</a>
-              <a class="button edit" onClick={toggleEdit}>Edit</a>
-              {showEdit && <EditProduct product={item} />}
-            </div>
-            <a class="delete-button"><span>X</span></a>
-          </div>
+      <div className="product-details">
+        <h3>{item.title}</h3>
+        <p className="price">{item.price}</p>
+        <p className="quantity">{item.quantity} left in stock</p>
+        <div className="actions product-actions">
+          <a href="/#" className="button add-to-cart">Add to Cart</a>
+          <a href="/#" className="button edit" onClick={toggleEdit}>Edit</a>
+          {showEdit && <EditProduct product={item} />}
         </div>
+        <a href="/#" className="delete-button"><span>X</span></a>
+      </div>
+    </div>
   );
 }
 

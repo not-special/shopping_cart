@@ -2,7 +2,7 @@ const ProductEdit = ({ title, price, quantity })=> {
 
   return (
     <div class="edit-form">
-      <h3>Edit Product</h3>
+      {/* <h3>Edit Product</h3>
       <form>
         <div class="input-group">
           <label for="product-name">Product Name</label>
@@ -23,7 +23,7 @@ const ProductEdit = ({ title, price, quantity })=> {
           <a class="button">Update</a>
           <a class="button">Cancel</a>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 }

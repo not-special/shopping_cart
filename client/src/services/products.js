@@ -10,7 +10,12 @@ const remove = (id) => {
   return axios.delete(`${baseUrl}/products/${id}`)
 } 
 
+const add = (product) => {
+  return axios.post(`${baseUrl}/products`, product)
+}
+
 export default {
   getAll, 
   remove,
+  add,
 }

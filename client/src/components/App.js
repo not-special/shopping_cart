@@ -31,6 +31,14 @@ const App = () => {
       })
   }
 
+  const handleAddProduct = (product) => {
+    productService
+      .add(product)
+      .then(response => {
+        setProducts(products.concat(response.data))
+      })
+  }
+
 
 	return (
     <div id="app">
@@ -40,7 +48,7 @@ const App = () => {
       </header>
       <main>
         <ProductListing products={products} onDeleteProduct={handleDeleteProduct}/>
-        <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible}/>
+        <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
       </main>
     </div>
   );

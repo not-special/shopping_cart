@@ -4,10 +4,12 @@ import Cart from "./Cart";
 import AddProductForm from "./AddProductForm";
 import data from "../lib/data.js"
 import productService from '../services/products'
+import cartItemService from '../services/cart_items'
 
 const App = () => {
 	const [products, setProducts] = useState([]);
   const [productFormVisible, setProductFormVisible] = useState(false);
+  const [cartItems, setCartItems] = useState([])
   
   const getProducts = () => {
     productService
@@ -47,14 +49,30 @@ const App = () => {
       })
   }
 
+  const handleGetCartItems = () => {
+    cartItemService
+      .getAll()
+      .then(cartItems => {
+        setCartItems(cartItems)
+      })
+  }
+
+  const handleAddCartItem = (id) => {
+    cartItemService
+      .add({"productId": id})
+      .then(response => {
+        setCartItems(cartItems.concat(response.data.item))
+      })
+  }
+
 	return (
     <div id="app">
       <header>
         <h1>The Shop!</h1>
-        <Cart />
+        <Cart items={cartItems}/>
       </header>
       <main>
-        <ProductListing products={products} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct}/>
+        <ProductListing products={products} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
         <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
       </main>
     </div>

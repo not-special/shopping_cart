@@ -136,6 +136,7 @@ router.delete("/products/:id", (req, res, next) => {
 
 router.post("/add-to-cart", (req, res, next) => {
   const { productId } = req.body;
+
   Product.findById(productId)
     .then((product) => {
       if (product.quantity === 0) {

@@ -14,20 +14,25 @@ const Cart = ({ currentCart, onCheckoutCart }) => {
   }
 
   return (
-    <div class="cart">
+    <div className="cart">
         <h2>Your Cart</h2>
-        <table class="cart-items">
+        <table className="cart-items">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+          {currentCart.map(cartItem => <CartItem key={cartItem._id} itemDetail={cartItem}/>)}
           <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <td colSpan="3" className="total">Total: ${calcCartTotal(currentCart)}</td>
           </tr>
-          {currentCart.map(cartItem => <CartItem key={cartItem.id} itemDetail={cartItem}/>)}
-          <tr>
-            <td colspan="3" class="total">Total: ${calcCartTotal(currentCart)}</td>
-          </tr>
+          </tbody>
+          
         </table>
-        <a href="/#" class="button checkout" onClick={onCheckoutCart}>Checkout</a>
+        <a href="/#" className="button checkout" onClick={onCheckoutCart}>Checkout</a>
       </div>
   )
 }

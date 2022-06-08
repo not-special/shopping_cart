@@ -1,9 +1,16 @@
 import Product from "./Product"
-const ProductList = ({ inventory }) => {  
+const ProductList = ({ inventory, onHandleEdit, onHandleDelete }) => { 
   return (
     <div className="product-listing">
       <h2>Products</h2>
-        {inventory.map(item => <Product key={item._id.toString()} item={item} />)}   
+        {inventory.map(item => 
+          <Product 
+            key={item._id.toString()} 
+            item={item} 
+            onHandleEdit={onHandleEdit}
+            onHandleDelete={onHandleDelete}
+          />)
+        }   
     </div>
   )
 }

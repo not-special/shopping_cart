@@ -54,11 +54,38 @@ const App = () => {
     }
   }
 
+  const handleEditProduct = async (updatedProduct, id) => {
+    try {
+      const result = await db.editProduct(updatedProduct, id);
+      const updatedInventory = [...inventory];
+      updatedInventory.splice(updatedInventory.findIndex(item => item._id === result._id),1,result);
+      setInventory(updatedInventory);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  const handleDeleteProduct = async (id) => {
+    try {
+      const result = await db.deleteProduct(id);
+      if (!result) {
+        const updatedInventory = inventory.filter(item => item._id !== id);
+        setInventory(updatedInventory);
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  }
+
   return (
     <div id="app">
       <Header cart={cart}/>
       <main>
-        <ProductList inventory={inventory} />
+        <ProductList 
+          inventory={inventory} 
+          onHandleEdit={handleEditProduct}
+          onHandleDelete={handleDeleteProduct}
+          />
         <ProductAddForm onSubmitHandler={handleNewProduct}/>
       </main>
     </div>

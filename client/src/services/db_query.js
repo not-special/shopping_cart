@@ -17,10 +17,22 @@ const addNewProduct = (newProduct) => {
   return req.then(res => res.data);
 }
 
+const editProduct = (updatedProduct, id) => {
+  const req = axios.put(`${productURL}/${id}`, updatedProduct);
+  return req.then(res => res.data);
+}
+
+const deleteProduct = (id) => {
+  const req = axios.delete(`${productURL}/${id}`);
+  return req.then(res => res.data);
+}
+
 const dbServices = {
   getProducts,
   getCartItems,
-  addNewProduct
+  addNewProduct,
+  editProduct,
+  deleteProduct
 }
 
 export default dbServices;

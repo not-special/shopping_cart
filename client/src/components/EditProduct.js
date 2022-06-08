@@ -5,18 +5,6 @@ const ProductEdit = ({ item, onToggleEdit, onEdit })=> {
   const [ editPrice, setEditPrice ] = useState(item.price);
   const [ editQuantity, setEditQuantity ] = useState(item.quantity);
 
-  // const handleTitleChange = (e) => {
-  //   setEditTitle(e.target.value);
-  // }
-
-  // const handlePriceChange = (e) => {
-  //   setEditPrice(e.target.value);
-  // }
-
-  // const handleQtyChange = (e) => {
-  //   setEditQuantity(e.target.value);
-  // }
-
   const handleChange = (e) => {
     const changedVal = e.target.value
     switch (e.target.id) {
@@ -36,10 +24,8 @@ const ProductEdit = ({ item, onToggleEdit, onEdit })=> {
       price: editPrice,
       quantity: editQuantity
     };
-
-    const id = e.target.id;
     
-    onEdit(updatedProd, id);
+    onEdit(updatedProd, item._id);
     setEditTitle('');
     setEditPrice('');
     setEditQuantity('');
@@ -66,7 +52,7 @@ const ProductEdit = ({ item, onToggleEdit, onEdit })=> {
         </div>
 
         <div className="actions form-actions">
-          <a href="/#" className="button" id={item._id} onClick={handleSubmit}>Update</a>
+          <a href="/#" className="button" onClick={handleSubmit}>Update</a>
           <a href="/#" className="button" onClick={onToggleEdit}>Cancel</a>
         </div>
       </form>

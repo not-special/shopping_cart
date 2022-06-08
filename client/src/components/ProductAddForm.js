@@ -33,12 +33,19 @@ const ProductAddForm = ({ onSubmitHandler })=> {
     // call db func
     onSubmitHandler(newProd);
     // reset form state >> these resets are not working
-    setNewProdTitle(''); 
-    setNewProdPrice('');
-    setNewProdQuantity('');
+    // setNewProdTitle('DELETE ME! AFTER ADD OP'); 
+    // setNewProdPrice('');
+    // setNewProdQuantity('');
+    resetForm();
     console.log("RESET:", newProdTitle, newProdPrice, newProdQuantity);
     toggleForm(e); 
   }  
+
+  const resetForm = () => {
+    setNewProdTitle(''); 
+    setNewProdPrice('');
+    setNewProdQuantity('');
+  }
 
   const addFormClass = showForm ? "add-form visible" : "add-form";
   const showAddButton = showForm ? "button add-product-button" : "button add-product-button visible";

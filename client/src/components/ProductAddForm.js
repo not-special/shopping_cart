@@ -6,7 +6,8 @@ const ProductAddForm = ({ onSubmitHandler })=> {
   const [ newProdPrice, setNewProdPrice ] = useState('');
   const [ newProdQuantity, setNewProdQuantity ] = useState('');
 
-  const toggleForm = () => {
+  const toggleForm = (e) => {
+    e.preventDefault();
     setShowForm(!showForm);
   };
 
@@ -24,7 +25,6 @@ const ProductAddForm = ({ onSubmitHandler })=> {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //create newProd
     const newProd = {
       title: newProdTitle,
       price: newProdPrice,
@@ -32,11 +32,12 @@ const ProductAddForm = ({ onSubmitHandler })=> {
     };
     // call db func
     onSubmitHandler(newProd);
-    // reset form state
+    // reset form state >> these resets are not working
     setNewProdTitle('');
     setNewProdPrice('');
     setNewProdQuantity('');
-    toggleForm(); 
+    console.log("RESET:", newProdTitle, newProdPrice, newProdQuantity);
+    toggleForm(e); 
   }  
 
   const addFormClass = showForm ? "add-form visible" : "add-form";

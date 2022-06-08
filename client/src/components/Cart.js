@@ -2,8 +2,6 @@ import React from 'react'
 import CartItem from './CartItem';
 
 const Cart = ({items, onCheckout}) =>  {
-  console.log('items: ', items)
-
   const getTotalPrice = () => {
     let total = 0;
     items.forEach(item => {
@@ -11,7 +9,6 @@ const Cart = ({items, onCheckout}) =>  {
     })
     return total
   }
-
 
   const emptyCart = () => {
     return (
@@ -28,15 +25,19 @@ const Cart = ({items, onCheckout}) =>  {
       <>
         <h2>Your Cart</h2>
         <table className="cart-items">
-          <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-          {items.map(item => <CartItem key={item._id} item={item} />)}
-          <tr>
-            <td colspan="3" className="total"><p>{`Total: $${getTotalPrice()}`}</p></td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map(item => <CartItem key={item._id} item={item} />)}
+            <tr>
+              <td colSpan="3" className="total"><p>{`Total: $${getTotalPrice()}`}</p></td>
+            </tr>
+          </tbody>
         </table>
       </>
     )

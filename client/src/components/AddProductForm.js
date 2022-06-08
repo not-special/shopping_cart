@@ -1,27 +1,6 @@
 import {React, useState} from 'react'
 
 const AddProductForm = ({toggleVisibility, visible, onAddProduct}) => {
-  // const button = document.querySelector('.add-product-button')
-  // console.log('button: ', button)
-  // button.addEventListener('click', e => {
-  //   e.preventDefault()
-  //   console.log('clicked!')
-  // })
-	// const debuggingFunction = (event) => {
-	// 	console.log('here!!!!');
-	// 	console.log(toggleProductFormVisibility);
-	// 	toggleProductFormVisibility(event);
-	// }
-
-	/*
-	const [showAddForm, setShowAddForm] = useState(false)
-	const addFormClass = showAddForm ? 'add-form visible' : 'add-form';
-	const toggleForm = () => setShownAddForm(!showAddForm)
-
-	<div class={addFormClass}
-	onClick={toggleForm}
-	*/
-
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')

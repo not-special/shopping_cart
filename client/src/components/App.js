@@ -2,7 +2,6 @@ import { React, useState, useEffect } from "react";
 import ProductListing from "./ProductListing";
 import Cart from "./Cart";
 import AddProductForm from "./AddProductForm";
-import data from "../lib/data.js"
 import productService from '../services/products'
 import cartItemService from '../services/cart_items'
 
@@ -28,7 +27,6 @@ const App = () => {
     productService 
       .remove(id)
       .then((response) => {
-        console.log('response for delete:', response);
         setProducts(products.filter(product => product._id !== id));
       })
   }
@@ -49,20 +47,29 @@ const App = () => {
       })
   }
 
-  const handleGetCartItems = () => {
-    cartItemService
-      .getAll()
-      .then(cartItems => {
-        setCartItems(cartItems)
-      })
+  const mergeNewItem = (item) => {
+    let items = [...cartItems]
+    let foundItem = false;
+    
+    items = items.map(i => {
+      if (i.productId === item.productId) {
+        foundItem = true
+        return item
+      } else {
+        return i
+      }
+    })
+  
+    if (!foundItem) items = items.concat(item)
+    return items
   }
 
   const handleAddCartItem = (id) => {
     cartItemService
       .add({"productId": id})
       .then(response => {
-        console.log('handleCartItem response: ', response)
-        setCartItems(cartItems.concat(response.data.item))
+        setCartItems(mergeNewItem(response.data.item))
+        setProducts(products.map(product => product._id === id ? response.data.product : product))
       })
   }
 
@@ -74,6 +81,10 @@ const App = () => {
 			})
 	}
 
+  const productsWithInventory = () => {
+    return products.filter(product => product.quantity > 0)
+  }
+
 	return (
     <div id="app">
       <header>
@@ -81,7 +92,7 @@ const App = () => {
         <Cart items={cartItems} onCheckout={handleCheckout}/>
       </header>
       <main>
-        <ProductListing products={products} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
+        <ProductListing products={productsWithInventory()} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
         <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
       </main>
     </div>

@@ -1,7 +1,7 @@
 import CartItem from "./CartItem";
 import calcCartTotal from "../lib/calcCartTotal";
 
-const Cart = ({ currentCart }) => {
+const Cart = ({ currentCart, onCheckoutCart }) => {
   if (currentCart.length === 0) {
     return (
       <div className="cart">
@@ -12,6 +12,7 @@ const Cart = ({ currentCart }) => {
       </div>
     );
   }
+
   return (
     <div class="cart">
         <h2>Your Cart</h2>
@@ -23,10 +24,10 @@ const Cart = ({ currentCart }) => {
           </tr>
           {currentCart.map(cartItem => <CartItem key={cartItem.id} itemDetail={cartItem}/>)}
           <tr>
-            <td colspan="3" class="total">Total: {calcCartTotal(currentCart)}</td>
+            <td colspan="3" class="total">Total: ${calcCartTotal(currentCart)}</td>
           </tr>
         </table>
-        <a href="https://www.launchschool.com" class="button checkout">Checkout</a>
+        <a href="/#" class="button checkout" onClick={onCheckoutCart}>Checkout</a>
       </div>
   )
 }

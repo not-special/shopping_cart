@@ -36,7 +36,8 @@ const ProductEdit = ({ item, onToggleEdit, onEdit })=> {
       price: editPrice,
       quantity: editQuantity
     };
-    const id = e.target.parentElement.parentElement.parentElement.parentElement.id; // UGLY!!!
+
+    const id = e.target.id;
     
     onEdit(updatedProd, id);
     setEditTitle('');
@@ -65,7 +66,7 @@ const ProductEdit = ({ item, onToggleEdit, onEdit })=> {
         </div>
 
         <div className="actions form-actions">
-          <a href="/#" className="button" onClick={handleSubmit}>Update</a>
+          <a href="/#" className="button" id={item._id} onClick={handleSubmit}>Update</a>
           <a href="/#" className="button" onClick={onToggleEdit}>Cancel</a>
         </div>
       </form>

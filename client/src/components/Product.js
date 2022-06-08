@@ -39,7 +39,7 @@ const Product = ({item, onEdit, onDelete, onAddToCart })=> {
           <EditProduct 
             item={item} 
             onToggleEdit={toggleEdit} 
-            onHandleEdit={onEdit}
+            onEdit={onEdit}
           />
         }
         <a href="/#" className="delete-button" onClick={handleDelete}><span>X</span></a>

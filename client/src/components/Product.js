@@ -1,7 +1,7 @@
 import { useState } from "react";
 import EditProduct from "./EditProduct";
 
-const Product = ({item, onHandleEdit, onHandleDelete })=> {
+const Product = ({item, onEdit, onDelete, onAddToCart })=> {
   const [ showEdit, setShowEdit ] = useState(false);
   
   const toggleEdit = (e) => {
@@ -11,7 +11,12 @@ const Product = ({item, onHandleEdit, onHandleDelete })=> {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    onHandleDelete(e.target.parentElement.parentElement.id);
+    onDelete(e.target.parentElement.parentElement.id);
+  }
+
+  const addItemToCart = (e) => {
+    e.preventDefault();
+    onAddToCart(item);
   }
 
   const showActionButtons = showEdit ? "actions product-actions hidden" : "actions product-actions";
@@ -20,17 +25,21 @@ const Product = ({item, onHandleEdit, onHandleDelete })=> {
     <div className="product">
       <div className="product-details" id={item._id}>
         <h3>{item.title}</h3>
-        <p className="price">{item.price}</p>
+        {
+          item.title.includes('Srdjan Bobblehead') &&
+          <img src="./images/srdjan_bobblehead_sml.png" alt="Srdjan Bobblehead"></img>
+        }
+        <p className="price">${(item.price).toFixed(2)}</p>
         <p className="quantity">{item.quantity} left in stock</p>
         <div className={showActionButtons}>
-          <a href="/#" className="button add-to-cart">Add to Cart</a>
+          <a href="/#" className="button add-to-cart" onClick={addItemToCart}>Add to Cart</a>
           <a href="/#" className="button edit" onClick={toggleEdit}>Edit</a>
         </div>
         {showEdit && 
           <EditProduct 
             item={item} 
             onToggleEdit={toggleEdit} 
-            onHandleEdit={onHandleEdit}
+            onHandleEdit={onEdit}
           />
         }
         <a href="/#" className="delete-button" onClick={handleDelete}><span>X</span></a>

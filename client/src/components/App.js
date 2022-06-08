@@ -47,8 +47,7 @@ const App = () => {
   const handleNewProduct = async (newProd) => {
     try {
       const addedProd = await db.addNewProduct(newProd)
-      const newInventory = [...inventory, addedProd]
-      setInventory(newInventory)
+      setInventory([...inventory, addedProd])
     } catch(e) {
       console.error(e)
     }
@@ -77,14 +76,42 @@ const App = () => {
     }
   }
 
+  const handleAddToCart = async (item) => {
+    try {
+      const added = await db.addItemToCart({ productId: item._id });
+      if (added) {
+        const tempCart = cart.filter(item => item._id !== added.item._id)
+        setCart([...tempCart, added.item]);
+        setInventory(inventory.map(product => {
+          if (product._id === item._id) {
+            product.quantity -= 1;
+          }
+          return product
+        }))
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  }
+
+  const handleCheckoutCart = async () => {
+    try {
+      await db.checkoutCart();
+      setCart([]);
+    } catch(e) {
+      console.error(e);
+    }
+  }
+
   return (
     <div id="app">
-      <Header cart={cart}/>
+      <Header cart={cart} onCheckoutCart={handleCheckoutCart}/>
       <main>
         <ProductList 
           inventory={inventory} 
-          onHandleEdit={handleEditProduct}
-          onHandleDelete={handleDeleteProduct}
+          onEdit={handleEditProduct}
+          onDelete={handleDeleteProduct}
+          onAddToCart={handleAddToCart}
           />
         <ProductAddForm onSubmitHandler={handleNewProduct}/>
       </main>

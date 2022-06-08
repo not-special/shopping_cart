@@ -27,12 +27,24 @@ const deleteProduct = (id) => {
   return req.then(res => res.data);
 }
 
+const addItemToCart = (item) => {
+  const req = axios.post('api/add-to-cart', item);
+  return req.then(res => res.data); // returns a cart item object for added item
+}
+
+const checkoutCart = () => {
+  const req = axios.post('api/checkout');
+  return req.then(res => res.data); // returns number of deleted products
+}
+
 const dbServices = {
   getProducts,
   getCartItems,
   addNewProduct,
   editProduct,
-  deleteProduct
+  deleteProduct,
+  addItemToCart,
+  checkoutCart
 }
 
 export default dbServices;

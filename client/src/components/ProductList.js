@@ -1,5 +1,5 @@
 import Product from "./Product"
-const ProductList = ({ inventory, onHandleEdit, onHandleDelete }) => { 
+const ProductList = ({ inventory, onEdit, onDelete, onAddToCart }) => {
   return (
     <div className="product-listing">
       <h2>Products</h2>
@@ -7,8 +7,9 @@ const ProductList = ({ inventory, onHandleEdit, onHandleDelete }) => {
           <Product 
             key={item._id.toString()} 
             item={item} 
-            onHandleEdit={onHandleEdit}
-            onHandleDelete={onHandleDelete}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onAddToCart={onAddToCart}
           />)
         }   
     </div>

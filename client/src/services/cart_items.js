@@ -10,7 +10,12 @@ const add = (productId) => {
   return axios.post(`${baseUrl}/add-to-cart`, productId)
 }
 
+const deleteAll = () => {
+	return axios.post(`${baseUrl}/checkout`)
+}
+
 export default {
   getAll,
-  add
+  add,
+	deleteAll
 }

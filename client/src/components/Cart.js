@@ -1,7 +1,9 @@
 import React from 'react'
 import CartItem from './CartItem';
 
-const Cart = ({items}) =>  {
+const Cart = ({items, onCheckout}) =>  {
+  console.log('items: ', items)
+
   const getTotalPrice = () => {
     let total = 0;
     items.forEach(item => {
@@ -38,12 +40,17 @@ const Cart = ({items}) =>  {
         </table>
       </>
     )
-  }
+  } 
+
+	const handleCheckout = (e) => {
+		e.preventDefault();
+		onCheckout(); 
+	}
 
 	return (
     <div className="cart">
       {(items.length === 0) ? emptyCart() : nonEmptyCart() }
-      <a className="button checkout disabled">Checkout</a>
+      <a className={`button checkout ${items.length === 0 ? "disabled" : ""}`} onClick={handleCheckout}>Checkout</a>
     </div>
 	)
 };

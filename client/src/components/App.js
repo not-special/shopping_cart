@@ -61,15 +61,24 @@ const App = () => {
     cartItemService
       .add({"productId": id})
       .then(response => {
+        console.log('handleCartItem response: ', response)
         setCartItems(cartItems.concat(response.data.item))
       })
   }
+
+	const handleCheckout = () => {
+		cartItemService
+			.deleteAll()
+			.then(response => {
+				setCartItems([]);
+			})
+	}
 
 	return (
     <div id="app">
       <header>
         <h1>The Shop!</h1>
-        <Cart items={cartItems}/>
+        <Cart items={cartItems} onCheckout={handleCheckout}/>
       </header>
       <main>
         <ProductListing products={products} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>

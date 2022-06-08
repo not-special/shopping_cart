@@ -6,8 +6,8 @@ const ProductAddForm = ({ onSubmitHandler })=> {
   const [ newProdPrice, setNewProdPrice ] = useState('');
   const [ newProdQuantity, setNewProdQuantity ] = useState('');
 
-  const toggleForm = (e) => {
-    e.preventDefault();
+  const toggleForm = () => {
+    // e.preventDefault();
     setShowForm(!showForm);
   };
 
@@ -23,6 +23,12 @@ const ProductAddForm = ({ onSubmitHandler })=> {
     setNewProdQuantity(e.target.value);
   }
 
+  const resetForm = () => {
+    setNewProdTitle(''); 
+    setNewProdPrice('');
+    setNewProdQuantity('');
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newProd = {
@@ -30,14 +36,10 @@ const ProductAddForm = ({ onSubmitHandler })=> {
       price: newProdPrice,
       quantity: newProdQuantity
     };
-    // call db func
+    
     onSubmitHandler(newProd);
-    // reset form state >> these resets are not working
-    setNewProdTitle('');
-    setNewProdPrice('');
-    setNewProdQuantity('');
-    console.log("RESET:", newProdTitle, newProdPrice, newProdQuantity);
-    toggleForm(e); 
+    toggleForm(); 
+    resetForm();
   }  
 
   const addFormClass = showForm ? "add-form visible" : "add-form";
@@ -49,23 +51,23 @@ const ProductAddForm = ({ onSubmitHandler })=> {
         <h3>Add Product</h3>
         <form>
           <div className="input-group">
-            <label for="product-name">Product Name</label>
-            <input type="text" id="product-name" onChange={handleTitleChange}/>
+            <label htmlFor="product-name">Product Name</label>
+            <input type="text" id="product-name" value={newProdTitle} onChange={handleTitleChange}/>
           </div>
 
           <div className="input-group">
-            <label for="product-price">Price</label>
-            <input type="text" id="product-price"  onChange={handlePriceChange}/>
+            <label htmlFor="product-price">Price</label>
+            <input type="text" id="product-price" value={newProdPrice} onChange={handlePriceChange}/>
           </div>
 
           <div className="input-group">
-            <label for="product-quantity">Quantity</label>
-            <input type="text" id="product-quantity"  onChange={handleQtyChange}/>
+            <label htmlFor="product-quantity">Quantity</label>
+            <input type="text" id="product-quantity" value={newProdQuantity} onChange={handleQtyChange}/>
           </div>
 
           <div className="actions form-actions">
-            <a href="/#" className="button" onClick={handleSubmit}>Add</a>
-            <a href="/#" className="button" onClick={toggleForm}>Cancel</a>
+            <a href="" className="button" onClick={handleSubmit}>Add</a>
+            <a href="" className="button" onClick={toggleForm}>Cancel</a>
           </div>
         </form>
       </div>

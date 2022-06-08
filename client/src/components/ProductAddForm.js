@@ -33,7 +33,7 @@ const ProductAddForm = ({ onSubmitHandler })=> {
     // call db func
     onSubmitHandler(newProd);
     // reset form state >> these resets are not working
-    setNewProdTitle('');
+    setNewProdTitle(''); 
     setNewProdPrice('');
     setNewProdQuantity('');
     console.log("RESET:", newProdTitle, newProdPrice, newProdQuantity);
@@ -49,17 +49,17 @@ const ProductAddForm = ({ onSubmitHandler })=> {
         <h3>Add Product</h3>
         <form>
           <div className="input-group">
-            <label for="product-name">Product Name</label>
+            <label htmlFor="product-name">Product Name</label>
             <input type="text" id="product-name" onChange={handleTitleChange}/>
           </div>
 
           <div className="input-group">
-            <label for="product-price">Price</label>
+            <label htmlFor="product-price">Price</label>
             <input type="text" id="product-price"  onChange={handlePriceChange}/>
           </div>
 
           <div className="input-group">
-            <label for="product-quantity">Quantity</label>
+            <label htmlFor="product-quantity">Quantity</label>
             <input type="text" id="product-quantity"  onChange={handleQtyChange}/>
           </div>
 

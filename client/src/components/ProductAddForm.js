@@ -36,9 +36,10 @@ const ProductAddForm = ({ onSubmitHandler })=> {
     // setNewProdTitle('DELETE ME! AFTER ADD OP'); 
     // setNewProdPrice('');
     // setNewProdQuantity('');
+    toggleForm(e); 
     resetForm();
     console.log("RESET:", newProdTitle, newProdPrice, newProdQuantity);
-    toggleForm(e); 
+    
   }  
 
   const resetForm = () => {

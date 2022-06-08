@@ -1,17 +1,38 @@
-import React from 'react'
+import { React, useState } from 'react'
+
 
 const ProductEdit = ({ product, onUpdateProduct }) => {
 
+	const [title, setTitle] = useState(product.title)
+  const [price, setPrice] = useState(product.price)
+  const [quantity, setQuantity] = useState(product.quantity)
+
 	const handleUpdateProduct = (e) => {
 		e.preventDefault(); 
-		let test = {
-			"title": "Keyboard",
-			"price": 50,
-			"quantity": 5
-		}
+    const newProduct = {
+      title,
+      price,
+      quantity
+    } 
+		onUpdateProduct(product._id, newProduct);
+		setTitle('')
+    setPrice('')
+    setQuantity('')
+	};
 
-		onUpdateProduct("629f919e1efca6c2c0409e88", test);	
-	}
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value)
+  }
+
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value)
+  }
+
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value)
+  }
+
 
 
 
@@ -21,17 +42,17 @@ const ProductEdit = ({ product, onUpdateProduct }) => {
 		<form>
 			<div className="input-group">
 				<label for="product-name">Product Name</label>
-				<input type="text" id="product-name" value={product.title}/>
+				<input type="text" id="product-name" value={title} onChange={handleTitleChange}/>
 			</div>
 
 			<div className="input-group">
 				<label for="product-price">Price</label>
-				<input type="text" id="product-price" value={product.price}/>
+				<input type="text" id="product-price" value={price} onChange={handlePriceChange}/>
 			</div>
 
 			<div className="input-group">
 				<label for="product-quantity">Quantity</label>
-				<input type="text" id="product-quantity" value={product.quantity}/>
+				<input type="text" id="product-quantity" value={quantity} onChange={handleQuantityChange}/>
 			</div>
 
 			<div className="actions form-actions">

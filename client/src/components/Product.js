@@ -4,7 +4,7 @@ import ProductEdit from './ProductEdit'
 import productService from '../services/products'
 import { productRemoved } from "../actions/productActions"
 
-const Product = ( { product, onUpdateProduct, onAddCartItem } ) => {
+const Product = ( { product, onAddCartItem } ) => {
 	const dispatch = useDispatch();
 	
 	const handleDeleteProduct = async (e) => {
@@ -29,7 +29,7 @@ const Product = ( { product, onUpdateProduct, onAddCartItem } ) => {
 				</div>
 				<a className="delete-button" onClick={handleDeleteProduct}><span>X</span></a>
 			</div>
-			<ProductEdit product={product} onUpdateProduct={onUpdateProduct}/>
+			<ProductEdit product={product} />
 		</div>
 	)
 };

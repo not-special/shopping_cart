@@ -1,7 +1,12 @@
 import { React, useState } from 'react'
+import productService from '../services/products'
+import { useDispatch } from 'react-redux'
+import { productUpdated } from "../actions/productActions"
 
 
-const ProductEdit = ({ product, onUpdateProduct }) => {
+
+const ProductEdit = ({ product }) => {
+	const dispatch = useDispatch();
 
 	const [title, setTitle] = useState(product.title)
   const [price, setPrice] = useState(product.price)
@@ -14,7 +19,13 @@ const ProductEdit = ({ product, onUpdateProduct }) => {
       price,
       quantity
     } 
-		onUpdateProduct(product._id, newProduct);
+		// onUpdateProduct(product._id, newProduct);
+		productService
+			.update(product._id, newProduct)
+			.then((response) => {
+				dispatch(productUpdated(response))
+			})
+
 		setTitle('')
     setPrice('')
     setQuantity('')
@@ -33,6 +44,17 @@ const ProductEdit = ({ product, onUpdateProduct }) => {
     setQuantity(e.target.value)
   }
 
+			// const handleUpdateProduct = (id, changedProduct) => {
+  //   productService 
+  //     .update(id, changedProduct)
+  //     .then((response) => {
+  //       setProducts(products.map(product => product._id === id ? response : product));
+  //     })
+  // }
+	/*
+		 updated product send to the server 
+		 the response add to the store 
+	*/
 
 
 

@@ -9,6 +9,9 @@ const products = (state = [], action) => {
     case "PRODUCT_REMOVED": {
       return state.filter(product => product._id !== action.payload)
     }
+    case "PRODUCT_UPDATED": {
+      return state.map(product => product._id ===  action.payload._id ? action.payload : product)
+    }
     default: {
       return state
     }

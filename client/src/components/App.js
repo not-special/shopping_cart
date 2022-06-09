@@ -15,13 +15,13 @@ const App = () => {
     setProductFormVisible(!productFormVisible)
   }
 
-  const handleUpdateProduct = (id, changedProduct) => {
-    productService 
-      .update(id, changedProduct)
-      .then((response) => {
-        setProducts(products.map(product => product._id === id ? response : product));
-      })
-  }
+  // const handleUpdateProduct = (id, changedProduct) => {
+  //   productService 
+  //     .update(id, changedProduct)
+  //     .then((response) => {
+  //       setProducts(products.map(product => product._id === id ? response : product));
+  //     })
+  // }
 
   const mergeNewItem = (item) => {
     let items = [...cartItems]
@@ -68,7 +68,7 @@ const App = () => {
         <Cart items={cartItems} onCheckout={handleCheckout}/>
       </header>
       <main>
-        <ProductListing products={productsWithInventory()} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
+        <ProductListing products={productsWithInventory()} onAddCartItem={handleAddCartItem}/>
         <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} />
       </main>
     </div>

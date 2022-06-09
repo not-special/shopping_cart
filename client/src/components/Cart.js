@@ -1,29 +1,27 @@
-import React from 'react'
+import { React, useEffect } from 'react'
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from "react-redux";
+import { cartItemsRemoved, cartItemsReceived } from "../actions/cartActions"
+import cartItemService from '../services/cart_items'
 
-const Cart = ({onCheckout}) =>  {
+const Cart = () =>  {
   const items = useSelector((state) => {
-		console.log("re-fetching cart items!!", state.cart)
 		return state.cart
 	})
 
-  // const mergeNewItem = (item) => {
-  //   let items = [...cartItems]
-  //   let foundItem = false;
-    
-  //   items = items.map(i => {
-  //     if (i.productId === item.productId) {
-  //       foundItem = true
-  //       return item
-  //     } else {
-  //       return i
-  //     }
-  //   })
-  
-  //   if (!foundItem) items = items.concat(item)
-  //   return items
-  // }
+  const dispatch = useDispatch()
+
+  const getCartItems = async () => {
+    const cartItems = await cartItemService.getAll()
+		dispatch(cartItemsReceived(cartItems))
+  }
+	useEffect(getCartItems, [dispatch])
+
+  const handleCheckout = async (e) => {
+		e.preventDefault();
+    await cartItemService.deleteAll()
+		dispatch(cartItemsRemoved())
+	}
 
   const getTotalPrice = () => {
     let total = 0;
@@ -65,11 +63,6 @@ const Cart = ({onCheckout}) =>  {
       </>
     )
   } 
-
-	const handleCheckout = (e) => {
-		e.preventDefault();
-		onCheckout(); 
-	}
 
 	return (
     <div className="cart">

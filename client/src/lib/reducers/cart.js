@@ -1,10 +1,30 @@
+const mergeNewItem = (item, cartItems) => {
+  let items = [...cartItems]
+  let foundItem = false;
+  
+  items = items.map(i => {
+    if (i.productId === item.productId) {
+      foundItem = true
+      return item
+    } else {
+      return i
+    }
+  })
+
+  if (!foundItem) items = items.concat(item)
+  return items
+}
+
 const cart = (state = [], action) => {
   switch (action.type) {
     case "CART_ITEM_ADDED": {
-      // TODO: update a row if that item is already in the cart!
-      console.log("cart reducer action.payload: ", action.payload)
-      return state.concat(action.payload.item)
-      // STEP 2: update product (i.e. reduce inventory displayed)
+      return mergeNewItem(action.payload, state)
+    }
+    case "CART_ITEMS_REMOVED": {
+      return []
+    }
+    case "CART_ITEMS_RECEIVED": {
+      return action.payload
     }
     default: {
       return state

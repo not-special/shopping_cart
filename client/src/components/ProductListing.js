@@ -7,7 +7,6 @@ import { productsReceived } from "../actions/productActions"
 const ProductListing = () => {
 	const dispatch = useDispatch()
 	const products = useSelector((state) => {
-		console.log("re-fetching products!!", state.products)
 		return state.products
 	})
 	const getProducts = async () => {

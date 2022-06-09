@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import ProductEdit from './ProductEdit'
 import productService from '../services/products'
 import cartItemService from '../services/cart_items'
-import { productRemoved } from "../actions/productActions"
+import { productRemoved, productUpdated } from "../actions/productActions"
 import { cartItemAdded } from "../actions/cartActions"
 
 const Product = ( { product } ) => {
@@ -17,17 +17,8 @@ const Product = ( { product } ) => {
 
 	const handleAddCartItem = async () => {
 		const response = await cartItemService.add({"productId": product._id})
-		console.log("handleAddCartItem response: ", response)
-		dispatch(cartItemAdded(response.data))
-
-		// const handleAddCartItem = (id) => {
-		// 	cartItemService
-		// 		.add({"productId": id})
-		// 		.then(response => {
-		// 			setCartItems(mergeNewItem(response.data.item))
-		// 			setProducts(products.map(product => product._id === id ? response.data.product : product))
-		// 		})
-		// }
+		dispatch(cartItemAdded(response.data.item))
+		dispatch(productUpdated(response.data.product))
   }
 
 	return (

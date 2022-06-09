@@ -12,23 +12,19 @@ const ProductEdit = ({ product }) => {
   const [price, setPrice] = useState(product.price)
   const [quantity, setQuantity] = useState(product.quantity)
 
-	const handleUpdateProduct = (e) => {
+	const handleUpdateProduct = async (e) => {
 		e.preventDefault(); 
     const newProduct = {
       title,
       price,
       quantity
     } 
-		// onUpdateProduct(product._id, newProduct);
-		productService
-			.update(product._id, newProduct)
-			.then((response) => {
-				dispatch(productUpdated(response))
-			})
-
-		setTitle('')
-    setPrice('')
-    setQuantity('')
+	
+		const response = await productService.update(product._id, newProduct)
+		dispatch(productUpdated(response))
+		setTitle(response.title)
+		setPrice(response.price)
+		setQuantity(response.quantity)
 	};
 
 

@@ -1,9 +1,14 @@
 import {React, useState} from 'react'
+import { useDispatch } from "react-redux"
+import productService from "../services/products"
+import { productAdded } from "../actions/productActions"
 
-const AddProductForm = ({toggleVisibility, visible, onAddProduct}) => {
+const AddProductForm = ({toggleVisibility, visible}) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
+
+  const dispatch = useDispatch(); 
 
   const handleAddProduct = (e) => {
     e.preventDefault()
@@ -12,11 +17,31 @@ const AddProductForm = ({toggleVisibility, visible, onAddProduct}) => {
       price,
       quantity
     } 
-    onAddProduct(product)
+    //send request to the server 
+    productService
+      .add(product)
+      .then(response => {
+        dispatch(productAdded(response.data));
+      })
+
+
+    // onAddProduct(product)
     setTitle('')
     setPrice('')
     setQuantity('')
+
+
   }
+
+  // const handleAddProduct = (product) => {
+  //   productService
+  //     .add(product)
+  //     .then(response => {
+  //       setProducts(products.concat(response.data))
+  //     })
+  // }
+
+
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value)

@@ -7,6 +7,7 @@ import { productsReceived } from "../actions/productActions"
 const ProductListing = ({ onDeleteProduct, onUpdateProduct, onAddCartItem}) => {
 	const dispatch = useDispatch()
 	const products = useSelector((state) => {
+		console.log("re-fetching products!!", state.products)
 		return state.products
 	})
 	const getProducts = async () => {

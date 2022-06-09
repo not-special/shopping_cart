@@ -10,14 +10,6 @@ const App = () => {
   const [productFormVisible, setProductFormVisible] = useState(false);
   const [cartItems, setCartItems] = useState([])
   
-  const getProducts = () => {
-    productService
-      .getAll()
-      .then(initialProducts => {
-        setProducts(initialProducts)
-      })
-  }
-  useEffect(getProducts, [])
 
   const toggleProductFormVisibility = () => {
     setProductFormVisible(!productFormVisible)
@@ -31,13 +23,13 @@ const App = () => {
       })
   }
 
-  const handleAddProduct = (product) => {
-    productService
-      .add(product)
-      .then(response => {
-        setProducts(products.concat(response.data))
-      })
-  }
+  // const handleAddProduct = (product) => {
+  //   productService
+  //     .add(product)
+  //     .then(response => {
+  //       setProducts(products.concat(response.data))
+  //     })
+  // }
 
   const handleUpdateProduct = (id, changedProduct) => {
     productService 
@@ -93,7 +85,7 @@ const App = () => {
       </header>
       <main>
         <ProductListing products={productsWithInventory()} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
-        <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
+        <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} />
       </main>
     </div>
   );

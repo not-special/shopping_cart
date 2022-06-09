@@ -10,27 +10,19 @@ const AddProductForm = ({toggleVisibility, visible}) => {
 
   const dispatch = useDispatch(); 
 
-  const handleAddProduct = (e) => {
+  const handleAddProduct = async (e) => {
     e.preventDefault()
     const product = {
       title,
       price,
       quantity
     } 
-    //send request to the server 
-    productService
-      .add(product)
-      .then(response => {
-        dispatch(productAdded(response.data));
-      })
+    const response = await productService.add(product)
+    dispatch(productAdded(response.data));
 
-
-    // onAddProduct(product)
     setTitle('')
     setPrice('')
     setQuantity('')
-
-
   }
 
   // const handleAddProduct = (product) => {

@@ -25,16 +25,6 @@ const AddProductForm = ({toggleVisibility, visible}) => {
     setQuantity('')
   }
 
-  // const handleAddProduct = (product) => {
-  //   productService
-  //     .add(product)
-  //     .then(response => {
-  //       setProducts(products.concat(response.data))
-  //     })
-  // }
-
-
-
   const handleTitleChange = (e) => {
     setTitle(e.target.value)
   }

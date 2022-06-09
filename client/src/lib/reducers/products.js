@@ -6,6 +6,9 @@ const products = (state = [], action) => {
     case "PRODUCT_ADDED": {
       return state.concat(action.payload)
     }
+    case "PRODUCT_REMOVED": {
+      return state.filter(product => product._id !== action.payload)
+    }
     default: {
       return state
     }

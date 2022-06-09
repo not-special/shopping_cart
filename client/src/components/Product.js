@@ -1,16 +1,21 @@
 import React from 'react'
-import ProductEdit from './ProductEdit';
+import { useDispatch } from 'react-redux'
+import ProductEdit from './ProductEdit'
+import productService from '../services/products'
+import { productRemoved } from "../actions/productActions"
 
-const Product = ( { product, onDeleteProduct, onUpdateProduct, onAddCartItem } ) => {
-	const handleDeleteProduct = (e) => {
+const Product = ( { product, onUpdateProduct, onAddCartItem } ) => {
+	const dispatch = useDispatch();
+	
+	const handleDeleteProduct = async (e) => {
 		e.preventDefault();
-		onDeleteProduct(product._id);
+		await productService.remove(product._id)
+		dispatch(productRemoved(product._id))
 	}
 
 	const handleAddCartItem = () => {
     onAddCartItem(product._id)
   }
-
 
 	return (
 		<div className="product">

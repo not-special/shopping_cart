@@ -1,7 +1,30 @@
 import React from 'react'
 import CartItem from './CartItem';
+import { useDispatch, useSelector } from "react-redux";
 
-const Cart = ({items, onCheckout}) =>  {
+const Cart = ({onCheckout}) =>  {
+  const items = useSelector((state) => {
+		console.log("re-fetching cart items!!", state.cart)
+		return state.cart
+	})
+
+  // const mergeNewItem = (item) => {
+  //   let items = [...cartItems]
+  //   let foundItem = false;
+    
+  //   items = items.map(i => {
+  //     if (i.productId === item.productId) {
+  //       foundItem = true
+  //       return item
+  //     } else {
+  //       return i
+  //     }
+  //   })
+  
+  //   if (!foundItem) items = items.concat(item)
+  //   return items
+  // }
+
   const getTotalPrice = () => {
     let total = 0;
     items.forEach(item => {

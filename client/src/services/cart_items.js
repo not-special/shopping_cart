@@ -7,6 +7,7 @@ const getAll = () => {
 }
 
 const add = (productId) => {
+  console.log("cartItemService productId: ", productId)
   return axios.post(`${baseUrl}/add-to-cart`, productId)
 }
 

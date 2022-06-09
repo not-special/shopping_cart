@@ -2,9 +2,11 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import ProductEdit from './ProductEdit'
 import productService from '../services/products'
+import cartItemService from '../services/cart_items'
 import { productRemoved } from "../actions/productActions"
+import { cartItemAdded } from "../actions/cartActions"
 
-const Product = ( { product, onAddCartItem } ) => {
+const Product = ( { product } ) => {
 	const dispatch = useDispatch();
 	
 	const handleDeleteProduct = async (e) => {
@@ -13,8 +15,19 @@ const Product = ( { product, onAddCartItem } ) => {
 		dispatch(productRemoved(product._id))
 	}
 
-	const handleAddCartItem = () => {
-    onAddCartItem(product._id)
+	const handleAddCartItem = async () => {
+		const response = await cartItemService.add({"productId": product._id})
+		console.log("handleAddCartItem response: ", response)
+		dispatch(cartItemAdded(response.data))
+
+		// const handleAddCartItem = (id) => {
+		// 	cartItemService
+		// 		.add({"productId": id})
+		// 		.then(response => {
+		// 			setCartItems(mergeNewItem(response.data.item))
+		// 			setProducts(products.map(product => product._id === id ? response.data.product : product))
+		// 		})
+		// }
   }
 
 	return (

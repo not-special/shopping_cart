@@ -4,7 +4,7 @@ import productService from '../services/products'
 import { useDispatch, useSelector } from "react-redux";
 import { productsReceived } from "../actions/productActions"
 
-const ProductListing = ({ onAddCartItem }) => {
+const ProductListing = () => {
 	const dispatch = useDispatch()
 	const products = useSelector((state) => {
 		console.log("re-fetching products!!", state.products)
@@ -20,7 +20,7 @@ const ProductListing = ({ onAddCartItem }) => {
 	return (
 		<div className="product-listing">
         <h2>Products</h2>
-				{products.map( product => <Product key={product._id} product={product}  onAddCartItem={onAddCartItem} /> )}
+				{products.map( product => <Product key={product._id} product={product} /> )}
 		</div>
 	)
 };

@@ -16,13 +16,10 @@ const products = (state = [], action) => {
       updatedInventory.splice(indexOfUpdated, 1, action.payload);
       return updatedInventory;
     }
-    case "PRODUCT_DECREMENTED": {
-      const id = action.payload
-      console.log("reducer: ", id)
+    case "ADDED_TO_CART": {
+      const id = action.payload.product._id;
       const modifiedItems = state.map(item => {
-        console.log(item)
         if (item._id === id) {
-          console.log("made it w item: ", item)
           item.quantity -=1;
         }
         return item;

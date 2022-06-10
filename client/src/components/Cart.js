@@ -1,7 +1,23 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import db from "../services/db_query";
+import { cartReceived } from "../actions/cartActions";
 import CartItem from "./CartItem";
 import calcCartTotal from "../lib/calcCartTotal";
 
-const Cart = ({ currentCart, onCheckoutCart }) => {
+const Cart = ({ onCheckoutCart }) => {
+  const dispatch = useDispatch();
+  const currentCart = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const data  = await db.getCartItems();
+      // dispatch({type: "CART_RECEIVED", payload: data})
+      dispatch(cartReceived(data));
+    };
+    fetchCart();
+  }, [dispatch]);
+  
   if (currentCart.length === 0) {
     return (
       <div className="cart">

@@ -13,7 +13,7 @@ const ProductEdit = ({ product, onToggleEditForm }) => {
   const [quantity, setQuantity] = useState(product.quantity)
 
 	const handleUpdateProduct = async (e) => {
-		e.preventDefault(); 
+		onToggleEditForm(e);
     const newProduct = {
       title,
       price,

@@ -7,11 +7,12 @@ const AddProductForm = ({toggleVisibility, visible}) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
+  
 
   const dispatch = useDispatch(); 
 
   const handleAddProduct = async (e) => {
-    e.preventDefault()
+    toggleVisibility(e)
     const product = {
       title,
       price,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import EditProduct from "./EditProduct";
-import { productDeleted, productDecremented } from "../actions/productActions";
+import { productDeleted } from "../actions/productActions";
 import { addedToCart } from "../actions/cartActions";
 import db from "../services/db_query"
 
@@ -28,11 +28,8 @@ const Product = ({ item })=> {
   const addItemToCart = async () => {
     try {
         const added = await db.addItemToCart({ productId: item._id });
-        const addedId = added.product._id;
-        const addedItem = added.item;
         if (added) {
-          dispatch(addedToCart(addedItem));
-          dispatch(productDecremented(addedId));
+          dispatch(addedToCart(added));
         }
       } catch(e) {
         console.error(e);

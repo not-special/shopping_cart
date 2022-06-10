@@ -7,22 +7,9 @@ import store from "./lib/store";
 import * as serviceWorker from "./serviceWorker";
 
 /*
-Use Redux create store to run the state of the app
-
-1. create store
-2. add state to store
-  - cart as array of item objects
-  - inventory as array of product objects
-3. connect handlers and reducers to update state
-  - get products
-  - add product
-  - edit product
-  - delete product
-  
-  - get cart items
-  - add item to cart
-  - checkout cart
-
+Remaining work:
+ - add 'cart item updated' functionality to 'ProductEdit' functionality
+   to keep cart items in sync w items in the product list
 */
 
 ReactDOM.render(

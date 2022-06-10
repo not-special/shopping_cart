@@ -28,25 +28,15 @@ const Product = ({ item })=> {
   const addItemToCart = async () => {
     try {
         const added = await db.addItemToCart({ productId: item._id });
+        const addedId = added.product._id;
         const addedItem = added.item;
         if (added) {
-          // const tempCart = cart.filter(item => item._id !== added.item._id)
-          // dispatch(addedToCart(added), productDecremented(added._id))
-          // console.log("Is this item? ", added.item)
-          // dispatch(addedToCart(addedItem));
-          dispatch(productDecremented(addedItem._id));
-          // setCart([...tempCart, added.item]);
-          // setInventory(inventory.map(product => {
-          //   if (product._id === item._id) {
-          //     product.quantity -= 1;
-          //   }
-          //   return product
-          // }))
+          dispatch(addedToCart(addedItem));
+          dispatch(productDecremented(addedId));
         }
       } catch(e) {
         console.error(e);
       }
-    // onAddToCart(item);
   }
 
   const showActionButtons = showEdit ? "actions product-actions hidden" : "actions product-actions";

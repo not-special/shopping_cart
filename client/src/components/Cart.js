@@ -5,7 +5,7 @@ import { cartReceived, cartCheckedOut } from "../actions/cartActions";
 import CartItem from "./CartItem";
 import calcCartTotal from "../lib/calcCartTotal";
 
-const Cart = ({ onCheckoutCart }) => {
+const Cart = () => {
   const dispatch = useDispatch();
   const currentCart = useSelector((state) => state.cart);
 

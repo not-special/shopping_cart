@@ -1,13 +1,41 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import db from "../services/db_query";
+import { productAdded } from "../actions/productActions";
 
-const ProductAddForm = ({ onSubmitHandler })=> {
+const ProductAddForm = ()=> {
   const [ showForm, setShowForm ] = useState(false);
   const [ newProdTitle, setNewProdTitle ] = useState('');
   const [ newProdPrice, setNewProdPrice ] = useState('');
   const [ newProdQuantity, setNewProdQuantity ] = useState('');
 
+  const dispatch = useDispatch();
+
+  const resetForm = () => {
+    setNewProdTitle(''); 
+    setNewProdPrice('');
+    setNewProdQuantity('');
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newProd = {
+      title: newProdTitle,
+      price: newProdPrice,
+      quantity: newProdQuantity
+    };
+    
+    try {
+      const addedProd = await db.addNewProduct(newProd)
+      dispatch(productAdded(addedProd));
+      toggleForm(); 
+      resetForm();
+    } catch(e) {
+      console.error(e)
+    }
+  }  
+
   const toggleForm = () => {
-    // e.preventDefault();
     setShowForm(!showForm);
   };
 
@@ -22,25 +50,6 @@ const ProductAddForm = ({ onSubmitHandler })=> {
   const handleQtyChange = (e) => {
     setNewProdQuantity(e.target.value);
   }
-
-  const resetForm = () => {
-    setNewProdTitle(''); 
-    setNewProdPrice('');
-    setNewProdQuantity('');
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newProd = {
-      title: newProdTitle,
-      price: newProdPrice,
-      quantity: newProdQuantity
-    };
-    
-    onSubmitHandler(newProd);
-    toggleForm(); 
-    resetForm();
-  }  
 
   const addFormClass = showForm ? "add-form visible" : "add-form";
   const showAddButton = showForm ? "button add-product-button" : "button add-product-button visible";

@@ -18,7 +18,7 @@ const mergeNewItem = (item, cartItems) => {
 const cart = (state = [], action) => {
   switch (action.type) {
     case "CART_ITEM_ADDED": {
-      return mergeNewItem(action.payload, state)
+      return mergeNewItem(action.payload.item, state)
     }
     case "CART_ITEMS_REMOVED": {
       return []

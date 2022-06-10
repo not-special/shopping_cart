@@ -21,8 +21,7 @@ const Product = ( { product } ) => {
 	const handleAddCartItem = async () => {
 		if (product.quantity !== 0) {
 			const response = await cartItemService.add({"productId": product._id})
-			dispatch(cartItemAdded(response.data.item))
-			dispatch(productUpdated(response.data.product))
+			dispatch(cartItemAdded(response.data))
 		}
   }
 

@@ -12,6 +12,9 @@ const products = (state = [], action) => {
     case "PRODUCT_UPDATED": {
       return state.map(product => product._id ===  action.payload._id ? action.payload : product)
     }
+    case "CART_ITEM_ADDED": {
+      return state.map(product => product._id ===  action.payload.product._id ? action.payload.product : product)
+    }
     default: {
       return state
     }

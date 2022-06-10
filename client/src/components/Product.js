@@ -19,9 +19,11 @@ const Product = ( { product } ) => {
 	}
 
 	const handleAddCartItem = async () => {
-		const response = await cartItemService.add({"productId": product._id})
-		dispatch(cartItemAdded(response.data.item))
-		dispatch(productUpdated(response.data.product))
+		if (product.quantity !== 0) {
+			const response = await cartItemService.add({"productId": product._id})
+			dispatch(cartItemAdded(response.data.item))
+			dispatch(productUpdated(response.data.product))
+		}
   }
 
 	const toggleEditForm = (e) => {
@@ -40,7 +42,7 @@ const Product = ( { product } ) => {
 				{showEditForm ? 
 				(<ProductEdit product={product} onToggleEditForm={toggleEditForm} />) :
 				<div className="actions product-actions">
-					<a className="button add-to-cart" onClick={handleAddCartItem}>Add to Cart</a>
+					<a className={`button add-to-cart ${product.quantity === 0 ? "disabled" : ""}`} onClick={handleAddCartItem} >Add to Cart</a>
 					<a className="button edit" onClick={toggleEditForm}>Edit</a>
 				</div>
 				}

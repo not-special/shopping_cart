@@ -17,12 +17,17 @@ const products = (state = [], action) => {
       return updatedInventory;
     }
     case "PRODUCT_DECREMENTED": {
-      return state.map(item => {
-        if (item._id === action.payload) {
+      const id = action.payload
+      console.log("reducer: ", id)
+      const modifiedItems = state.map(item => {
+        console.log(item)
+        if (item._id === id) {
+          console.log("made it w item: ", item)
           item.quantity -=1;
         }
         return item;
       })
+      return modifiedItems;
     }
     default: {
       return state;

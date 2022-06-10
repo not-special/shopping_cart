@@ -8,6 +8,9 @@ const cart = (state = [], action) => {
       const tempCart = state.filter(item => item._id !== id)
       return [...tempCart, action.payload]
     }
+    case "CART_CHECKED_OUT": {
+      return [];
+    }
     default: {
       return state;
     }

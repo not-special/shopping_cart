@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import db from "../services/db_query";
-import { cartReceived } from "../actions/cartActions";
+import { cartReceived, cartCheckedOut } from "../actions/cartActions";
 import CartItem from "./CartItem";
 import calcCartTotal from "../lib/calcCartTotal";
 
-const Cart = ({ onCheckoutCart }) => {
+const Cart = () => {
   const dispatch = useDispatch();
   const currentCart = useSelector((state) => state.cart);
 
@@ -17,6 +17,15 @@ const Cart = ({ onCheckoutCart }) => {
     };
     fetchCart();
   }, [dispatch]);
+
+  const handleCheckoutCart = async () => {
+    try {
+      await db.checkoutCart();
+      dispatch(cartCheckedOut())
+    } catch(e) {
+      console.error(e);
+    }
+  }
   
   if (currentCart.length === 0) {
     return (
@@ -48,7 +57,7 @@ const Cart = ({ onCheckoutCart }) => {
           </tbody>
           
         </table>
-        <a href="/#" className="button checkout" onClick={onCheckoutCart}>Checkout</a>
+        <a href="/#" className="button checkout" onClick={handleCheckoutCart}>Checkout</a>
       </div>
   )
 }

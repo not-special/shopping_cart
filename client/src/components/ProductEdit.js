@@ -5,7 +5,7 @@ import { productUpdated } from "../actions/productActions"
 
 
 
-const ProductEdit = ({ product }) => {
+const ProductEdit = ({ product, onToggleEditForm }) => {
 	const dispatch = useDispatch();
 
 	const [title, setTitle] = useState(product.title)
@@ -75,7 +75,7 @@ const ProductEdit = ({ product }) => {
 
 			<div className="actions form-actions">
 				<a className="button" onClick={handleUpdateProduct}>Update</a>
-				<a className="button">Cancel</a>
+				<a className="button" onClick={onToggleEditForm}>Cancel</a>
 			</div>
 		</form>
 	</div>

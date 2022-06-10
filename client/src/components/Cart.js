@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import db from "../services/db_query";
-import { cartReceived, cartCheckedOut } from "../actions/cartActions";
+// import { cartCheckedOut } from "../actions/cartActions";
+import { fetchCart, checkoutCart } from "../features/cart/cart";
 import CartItem from "./CartItem";
 import calcCartTotal from "../lib/calcCartTotal";
 
@@ -10,21 +11,17 @@ const Cart = () => {
   const currentCart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    const fetchCart = async () => {
-      const data  = await db.getCartItems();
-      // dispatch({type: "CART_RECEIVED", payload: data})
-      dispatch(cartReceived(data));
-    };
-    fetchCart();
+    dispatch(fetchCart());
   }, [dispatch]);
 
   const handleCheckoutCart = async () => {
-    try {
-      await db.checkoutCart();
-      dispatch(cartCheckedOut())
-    } catch(e) {
-      console.error(e);
-    }
+    dispatch(checkoutCart())
+    // try {
+    //   await db.checkoutCart();
+    //   dispatch(cartCheckedOut())
+    // } catch(e) {
+    //   console.error(e);
+    // }
   }
   
   if (currentCart.length === 0) {

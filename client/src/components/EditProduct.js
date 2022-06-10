@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import db from "../services/db_query";
-import { productUpdated } from "../actions/productActions";
+import { editProduct } from '../features/products/products';
 
 const ProductEdit = ({ item, onToggleEdit })=> {
   const [ editTitle, setEditTitle ] = useState(item.title);
@@ -26,6 +25,7 @@ const ProductEdit = ({ item, onToggleEdit })=> {
     setEditTitle('');
     setEditPrice('');
     setEditQuantity('');
+    onToggleEdit();
   }
 
   const handleSubmit = async (e) => {
@@ -35,15 +35,8 @@ const ProductEdit = ({ item, onToggleEdit })=> {
       price: editPrice,
       quantity: editQuantity
     };
-
-    try {
-      const result = await db.editProduct(updatedProd, item._id);
-      dispatch(productUpdated(result));
-      resetForm();
-      onToggleEdit();
-    } catch (e) {
-      console.error(e);
-    }
+    const id = item._id;
+    dispatch(editProduct({ updatedProd, id, callback: resetForm }))
   }
 
   return (

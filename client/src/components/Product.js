@@ -1,39 +1,24 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import EditProduct from "./EditProduct";
-import { productDeleted } from "../actions/productActions";
-import { addedToCart } from "../actions/cartActions";
-import db from "../services/db_query"
+import { addItemToCart } from "../features/cart/cart";
+import { deleteProduct } from "../features/products/products";
 
 const Product = ({ item })=> {
   const [ showEdit, setShowEdit ] = useState(false);
   const dispatch = useDispatch();
   
   const toggleEdit = () => {
-    setShowEdit(!showEdit)
+    setShowEdit(!showEdit);
   }
 
   const handleDeleteProduct = async () => {
-    const id = item._id
-    try {
-      const result = await db.deleteProduct(id);
-      if (!result) {
-        dispatch(productDeleted(id))
-      }
-    } catch(e) {
-      console.error(e);
-    }
+    const id = item._id;
+    dispatch(deleteProduct(id));
   }
 
-  const addItemToCart = async () => {
-    try {
-        const added = await db.addItemToCart({ productId: item._id });
-        if (added) {
-          dispatch(addedToCart(added));
-        }
-      } catch(e) {
-        console.error(e);
-      }
+  const handleAddToCart = async () => {
+    dispatch(addItemToCart({ productId: item._id }));
   }
 
   const showActionButtons = showEdit ? "actions product-actions hidden" : "actions product-actions";
@@ -49,8 +34,8 @@ const Product = ({ item })=> {
         <p className="price">${(item.price).toFixed(2)}</p>
         <p className="quantity">{item.quantity} left in stock</p>
         <div className={showActionButtons}>
-          <a href="/#" className="button add-to-cart" onClick={addItemToCart}>Add to Cart</a>
-          <a href="/#" className="button edit" onClick={toggleEdit}>Edit</a>
+          <a className="button add-to-cart" onClick={handleAddToCart}>Add to Cart</a>
+          <a className="button edit" onClick={toggleEdit}>Edit</a>
         </div>
         {showEdit && 
           <EditProduct 
@@ -58,7 +43,7 @@ const Product = ({ item })=> {
             onToggleEdit={toggleEdit} 
           />
         }
-        <a href="/#" className="delete-button" onClick={handleDeleteProduct}><span>X</span></a>
+        <a className="delete-button" onClick={handleDeleteProduct}><span>X</span></a>
       </div>
     </div>
   );

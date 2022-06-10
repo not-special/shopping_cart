@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import db from "../services/db_query";
-import { productAdded } from "../actions/productActions";
+import { addProduct } from "../features/products/products";
 
 const ProductAddForm = ()=> {
   const [ showForm, setShowForm ] = useState(false);
@@ -15,6 +14,7 @@ const ProductAddForm = ()=> {
     setNewProdTitle(''); 
     setNewProdPrice('');
     setNewProdQuantity('');
+    toggleForm();
   }
 
   const handleSubmit = async (e) => {
@@ -26,10 +26,7 @@ const ProductAddForm = ()=> {
     };
     
     try {
-      const addedProd = await db.addNewProduct(newProd)
-      dispatch(productAdded(addedProd));
-      toggleForm(); 
-      resetForm();
+      dispatch(addProduct({ newProd, callback: resetForm }));
     } catch(e) {
       console.error(e)
     }
@@ -56,7 +53,7 @@ const ProductAddForm = ()=> {
 
   return (
     <div className={addFormClass}>
-        <p><a href="/#" className={showAddButton} onClick={toggleForm}>Add A Product</a></p>
+        <p><a className={showAddButton} onClick={toggleForm}>Add A Product</a></p>
         <h3>Add Product</h3>
         <form>
           <div className="input-group">
@@ -75,8 +72,8 @@ const ProductAddForm = ()=> {
           </div>
 
           <div className="actions form-actions">
-            <a href="" className="button" onClick={handleSubmit}>Add</a>
-            <a href="" className="button" onClick={toggleForm}>Cancel</a>
+            <a className="button" onClick={handleSubmit}>Add</a>
+            <a className="button" onClick={toggleForm}>Cancel</a>
           </div>
         </form>
       </div>

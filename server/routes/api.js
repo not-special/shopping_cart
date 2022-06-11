@@ -122,7 +122,24 @@ router.put("/products/:id", (req, res) => {
     })
     .then((updatedProduct) => {
       res.json(updatedProduct);
-    });
+    })
+    .then(() => {
+      CartItem.findOne({
+        productId,
+      })
+      .then((item) => {
+        if (item) {
+          return CartItem.findOneAndUpdate(
+            { productId },
+            {
+              title,
+              price
+            },
+            { new: true}
+          );
+        }
+      })
+    })
 });
 
 router.delete("/products/:id", (req, res, next) => {

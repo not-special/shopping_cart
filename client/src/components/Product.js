@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import EditProduct from "./EditProduct";
+import ProductEdit from "./ProductEdit";
 import { addItemToCart } from "../features/cart/cart";
 import { deleteProduct } from "../features/products/products";
 
@@ -38,7 +38,7 @@ const Product = ({ item })=> {
           <a className="button edit" onClick={toggleEdit}>Edit</a>
         </div>
         {showEdit && 
-          <EditProduct 
+          <ProductEdit
             item={item} 
             onToggleEdit={toggleEdit} 
           />

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import db from "../../services/db_query";
+import { editProduct } from "../products/products";
 
 const initialState = [];
 
@@ -27,6 +28,13 @@ export const checkoutCart = createAsyncThunk(
   }
 );
 
+const updateCartItem = (updatedProduct, cartItem) => {
+  const cartItemCopy = JSON.parse(JSON.stringify(cartItem));
+  cartItemCopy.title = updatedProduct.title;
+  cartItemCopy.price = updatedProduct.price;
+  return cartItemCopy;
+}
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -43,6 +51,16 @@ const cartSlice = createSlice({
     builder.addCase(checkoutCart.fulfilled, (state, action) => {
       return [];
     });
+    builder.addCase(editProduct.fulfilled, (state, action) => {
+      const updatedProduct = action.payload;
+      const modifiedItems = state.map(item => {
+        if (item.productId === updatedProduct._id) {
+          return updateCartItem(updatedProduct, item);
+        }
+        return item;
+      });
+      return modifiedItems;
+    })
   }
 });
 

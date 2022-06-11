@@ -50,10 +50,6 @@ export const editProduct = createAsyncThunk(
   }
 );
 
-// export const decrementProduct = createAsyncThunk(
-//   "products/addItemToCart", (item) => item);
-
-
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -64,24 +60,24 @@ const productSlice = createSlice({
     });
     builder.addCase(addProduct.fulfilled, (state, action) => {
       return state.concat(action.payload);
-    })
+    });
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       const deletedId = action.payload
       return state.filter(item => item._id !== deletedId);
-    })
+    });
     builder.addCase(editProduct.fulfilled, (state, action) => {
       const updatedInventory = [...state];
       const indexOfUpdated = updatedInventory.findIndex(item => item._id === action.payload._id)
       updatedInventory.splice(indexOfUpdated, 1, action.payload);
       return updatedInventory;
-    })
+    });
     builder.addCase(addItemToCart.fulfilled, (state, action) => {
       const id = action.payload.product._id;
       const modifiedItems = state.map(item => {
         return item._id === id ? action.payload.product : item
       })
       return modifiedItems;
-    })
+    });
   }
 });
 

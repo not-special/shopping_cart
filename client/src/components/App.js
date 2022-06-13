@@ -6,23 +6,11 @@ import productService from '../services/products'
 import cartItemService from '../services/cart_items'
 
 const App = () => {
-	const [products, setProducts] = useState([]);
   const [productFormVisible, setProductFormVisible] = useState(false);
-
-  
-  const getProducts = () => {
-    productService
-      .getAll()
-      .then(initialProducts => {
-        setProducts(initialProducts)
-      })
-  }
-  useEffect(getProducts, [])
 
   const toggleProductFormVisibility = () => {
     setProductFormVisible(!productFormVisible)
   }
-
 
 	return (
     <div id="app">

@@ -1,22 +1,20 @@
 import ProductEdit from './ProductEdit'
-import { deleteProduct, ProductContext } from "../context/product-context"
+import { updateProduct, deleteProduct, ProductContext } from "../context/product-context"
+import { addCartItem, CartContext } from "../context/cart-context"
 import { useContext } from 'react';
 
-
-
-const Product = ( { product, onAddCartItem } ) => {
-	const { dispatch: productDispatch } = useContext(ProductContext)
+const Product = ( { product } ) => {
+	const { dispatch } = useContext(ProductContext)
+	const { cartItems, setCartItems } = useContext(CartContext)
 	
 	const handleDeleteProduct = (e) => {
 		e.preventDefault();
-		deleteProduct(productDispatch, product._id)
-
+		deleteProduct(dispatch, product._id)
 	}
 
 	const handleAddCartItem = () => {
-    onAddCartItem(product._id)
+		addCartItem(cartItems, setCartItems, product._id, updateProduct, dispatch)
   }
-
 
 	return (
 		<div className="product">

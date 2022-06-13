@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { fetchProducts, ProductContext } from '../context/product-context';
 import Product from './Product';
 
-const ProductListing = ({ onAddCartItem }) => {
+const ProductListing = () => {
 	const { products, dispatch } = useContext(ProductContext)
 	useEffect(() => {
 		fetchProducts(dispatch);
@@ -11,7 +11,7 @@ const ProductListing = ({ onAddCartItem }) => {
 	return (
 		<div className="product-listing">
         <h2>Products</h2>
-				{products.map( product => <Product key={product._id} product={product} onAddCartItem={onAddCartItem} /> )}
+				{products.map( product => <Product key={product._id} product={product} /> )}
 		</div>
 	)
 };

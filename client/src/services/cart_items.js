@@ -7,7 +7,7 @@ const getAll = () => {
 }
 
 const add = (productId) => {
-  return axios.post(`${baseUrl}/add-to-cart`, productId)
+  return axios.post(`${baseUrl}/add-to-cart`, {productId: productId})
 }
 
 const deleteAll = () => {

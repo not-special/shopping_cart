@@ -23,22 +23,6 @@ const App = () => {
     setProductFormVisible(!productFormVisible)
   }
 
-  // const handleDeleteProduct = (id) => {
-  //   productService 
-  //     .remove(id)
-  //     .then((response) => {
-  //       setProducts(products.filter(product => product._id !== id));
-  //     })
-  // }
-
-  const handleAddProduct = (product) => {
-    productService
-      .add(product)
-      .then(response => {
-        setProducts(products.concat(response.data))
-      })
-  }
-
   const handleUpdateProduct = (id, changedProduct) => {
     productService 
       .update(id, changedProduct)
@@ -81,10 +65,6 @@ const App = () => {
 			})
 	}
 
-  const productsWithInventory = () => {
-    return products.filter(product => product.quantity > 0)
-  }
-
 	return (
     <div id="app">
       <header>
@@ -93,7 +73,7 @@ const App = () => {
       </header>
       <main>
         <ProductListing onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
-        <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
+        <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} />
       </main>
     </div>
   );

@@ -1,9 +1,12 @@
-import {React, useState} from 'react'
+import {useContext, useState} from 'react'
+import { addProduct, ProductContext } from "../context/product-context"
 
-const AddProductForm = ({toggleVisibility, visible, onAddProduct}) => {
+const AddProductForm = ({toggleVisibility, visible}) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
+
+  const { dispatch } = useContext(ProductContext)
 
   const handleAddProduct = (e) => {
     e.preventDefault()
@@ -11,8 +14,9 @@ const AddProductForm = ({toggleVisibility, visible, onAddProduct}) => {
       title,
       price,
       quantity
-    } 
-    onAddProduct(product)
+    }
+    addProduct(dispatch, product) 
+
     setTitle('')
     setPrice('')
     setQuantity('')

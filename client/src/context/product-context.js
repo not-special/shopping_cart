@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createContext, useReducer } from "react";
 import productService from '../services/products'
 
@@ -10,7 +9,9 @@ const productReducer = (state, action) => {
       return action.payload
 		} case "PRODUCT_REMOVED" : {
 			return state.filter(product => product._id !== action.payload);
-		} default: {
+		} case "PRODUCT_ADDED": {
+      return state.concat(action.payload)
+    } default: {
       return state
     }
   }
@@ -23,7 +24,12 @@ export const fetchProducts = async (dispatch) => {
 
 export const deleteProduct = async (dispatch, id) => {
 	await productService.remove(id)
-	dispatch({type: "PRODUCT_REMOVED", payload: id})
+	dispatch({ type: "PRODUCT_REMOVED", payload: id })
+}
+
+export const addProduct = async (dispatch, product) => {
+  const { data } = await productService.add(product)
+  dispatch({ type: "PRODUCT_ADDED", payload: data })
 }
 
 export const ProductProvider = ({ children }) => {

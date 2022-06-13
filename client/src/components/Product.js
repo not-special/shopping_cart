@@ -5,7 +5,7 @@ import { useContext } from 'react';
 
 const Product = ( { product } ) => {
 	const { dispatch } = useContext(ProductContext)
-	const { cartItems, setCartItems } = useContext(CartContext)
+	const { items, setItems } = useContext(CartContext)
 	
 	const handleDeleteProduct = (e) => {
 		e.preventDefault();
@@ -13,7 +13,7 @@ const Product = ( { product } ) => {
 	}
 
 	const handleAddCartItem = () => {
-		addCartItem(cartItems, setCartItems, product._id, updateProduct, dispatch)
+		addCartItem(items, setItems, product._id, updateProduct, dispatch)
   }
 
 	return (

@@ -1,7 +1,13 @@
-import React from 'react'
+import { useContext, useEffect } from 'react'
 import CartItem from './CartItem';
+import { fetchItems, CartContext } from "../context/cart-context"
 
-const Cart = ({items, onCheckout}) =>  {
+const Cart = ({ onCheckout }) =>  {
+  const { items, setItems } = useContext(CartContext)
+  useEffect(() => {
+		fetchItems(setItems);
+	}, [])
+
   const getTotalPrice = () => {
     let total = 0;
     items.forEach(item => {

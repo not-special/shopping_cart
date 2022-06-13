@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useReducer } from "react";
+import productService from '../services/products'
 
 export const ProductContext = createContext()
 
@@ -13,8 +14,8 @@ const productReducer = (state, action) => {
   }
 }
 
-export const fetchProduct = async (dispatch) => {
-  const { data } = await axios.get("/api/products");
+export const fetchProducts = async (dispatch) => {
+  const data = await productService.getAll()
   dispatch({ type: "PRODUCTS_RECEIVED", payload: data })
 }
 

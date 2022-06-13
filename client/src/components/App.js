@@ -92,7 +92,7 @@ const App = () => {
         <Cart items={cartItems} onCheckout={handleCheckout}/>
       </header>
       <main>
-        <ProductListing products={productsWithInventory()} onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
+        <ProductListing onDeleteProduct={handleDeleteProduct} onUpdateProduct={handleUpdateProduct} onAddCartItem={handleAddCartItem}/>
         <AddProductForm toggleVisibility={toggleProductFormVisibility} visible={productFormVisible} onAddProduct={handleAddProduct}/>
       </main>
     </div>

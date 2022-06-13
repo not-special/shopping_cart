@@ -1,10 +1,16 @@
-import React from 'react'
-import ProductEdit from './ProductEdit';
+import ProductEdit from './ProductEdit'
+import { deleteProduct, ProductContext } from "../context/product-context"
+import { useContext } from 'react';
 
-const Product = ( { product, onDeleteProduct, onUpdateProduct, onAddCartItem } ) => {
+
+
+const Product = ( { product, onUpdateProduct, onAddCartItem } ) => {
+	const { dispatch: productDispatch } = useContext(ProductContext)
+	
 	const handleDeleteProduct = (e) => {
 		e.preventDefault();
-		onDeleteProduct(product._id);
+		deleteProduct(productDispatch, product._id)
+
 	}
 
 	const handleAddCartItem = () => {

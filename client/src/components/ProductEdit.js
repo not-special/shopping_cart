@@ -1,7 +1,9 @@
-import { React, useState } from 'react'
+import { React, useState, useContext } from 'react'
+import { updateProduct, ProductContext } from "../context/product-context" 
 
 
-const ProductEdit = ({ product, onUpdateProduct }) => {
+const ProductEdit = ({ product }) => {
+	const { dispatch: productDispatch } = useContext(ProductContext)
 
 	const [title, setTitle] = useState(product.title)
   const [price, setPrice] = useState(product.price)
@@ -13,8 +15,10 @@ const ProductEdit = ({ product, onUpdateProduct }) => {
       title,
       price,
       quantity
-    } 
-		onUpdateProduct(product._id, newProduct);
+    }
+		// console.log()
+		updateProduct(productDispatch, product._id, newProduct) 
+
 		setTitle('')
     setPrice('')
     setQuantity('')

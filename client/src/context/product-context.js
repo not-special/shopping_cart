@@ -11,7 +11,9 @@ const productReducer = (state, action) => {
 			return state.filter(product => product._id !== action.payload);
 		} case "PRODUCT_ADDED": {
       return state.concat(action.payload)
-    } default: {
+    } case "PRODUCT_UPDATED": {
+			return state.map(product => product._id === action.payload._id ? action.payload : product)
+		} default: {
       return state
     }
   }
@@ -30,6 +32,11 @@ export const deleteProduct = async (dispatch, id) => {
 export const addProduct = async (dispatch, product) => {
   const { data } = await productService.add(product)
   dispatch({ type: "PRODUCT_ADDED", payload: data })
+}
+
+export const updateProduct = async (dispatch, id, changedProduct) => {
+	const data = await productService.update(id, changedProduct)
+	dispatch({type: "PRODUCT_UPDATED", payload: data})
 }
 
 export const ProductProvider = ({ children }) => {

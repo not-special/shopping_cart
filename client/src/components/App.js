@@ -23,19 +23,12 @@ const App = () => {
     setProductFormVisible(!productFormVisible)
   }
 
-	const handleCheckout = () => {
-		// cartItemService
-		// 	.deleteAll()
-		// 	.then(response => {
-		// 		setCartItems([]);
-		// 	})
-	}
 
 	return (
     <div id="app">
       <header>
         <h1>The Shop!</h1>
-        <Cart onCheckout={handleCheckout}/>
+        <Cart />
       </header>
       <main>
         <ProductListing />

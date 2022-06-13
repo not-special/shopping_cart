@@ -31,6 +31,11 @@ export const fetchItems = async (setItems) => {
   setItems(data)
 }
 
+export const removeItems = async (setItems) => {
+	await cartService.deleteAll();
+	setItems([]);
+}
+
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
 

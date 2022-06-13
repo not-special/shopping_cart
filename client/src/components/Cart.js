@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react'
 import CartItem from './CartItem';
-import { fetchItems, CartContext } from "../context/cart-context"
+import { fetchItems, CartContext, removeItems } from "../context/cart-context"
 
-const Cart = ({ onCheckout }) =>  {
+const Cart = () =>  {
   const { items, setItems } = useContext(CartContext)
   useEffect(() => {
 		fetchItems(setItems);
@@ -51,7 +51,7 @@ const Cart = ({ onCheckout }) =>  {
 
 	const handleCheckout = (e) => {
 		e.preventDefault();
-		onCheckout(); 
+    removeItems(setItems);
 	}
 
 	return (

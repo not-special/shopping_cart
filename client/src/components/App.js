@@ -1,9 +1,7 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import ProductListing from "./ProductListing";
 import Cart from "./Cart";
 import AddProductForm from "./AddProductForm";
-import productService from '../services/products'
-import cartItemService from '../services/cart_items'
 
 const App = () => {
   const [productFormVisible, setProductFormVisible] = useState(false);

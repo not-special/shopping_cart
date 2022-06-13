@@ -1,7 +1,6 @@
 import { React, useState, useContext } from 'react'
 import { updateProduct, ProductContext } from "../context/product-context" 
 
-
 const ProductEdit = ({ product }) => {
 	const { dispatch: productDispatch } = useContext(ProductContext)
 
@@ -16,14 +15,12 @@ const ProductEdit = ({ product }) => {
       price,
       quantity
     }
-		// console.log()
 		updateProduct(productDispatch, product._id, newProduct) 
 
 		setTitle('')
     setPrice('')
     setQuantity('')
 	};
-
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value)
@@ -36,9 +33,6 @@ const ProductEdit = ({ product }) => {
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value)
   }
-
-
-
 
   return (
 		<div className="edit-form">
